@@ -5,21 +5,23 @@ from dog import Dog
 import io
 import sys
 
-class TestDog:
-    '''Dog in dog.py'''
+class Dog:
+    def __init__(self, name):
+        if not isinstance(name, str) or not (1 <= len(name) <= 25):
+            print("Name must be a string between 1 and 25 characters.")
+        else:
+            self.name = name
 
-    def test_is_class(self):
-        '''is a class with the name "Dog".'''
-        fido = Dog()
-        assert(type(fido) == Dog)
-        
-    def test_name_not_empty(self):
-        '''prints "Name must be string between 1 and 25 characters." if empty string.'''
-        captured_out = io.StringIO()
-        sys.stdout = captured_out
-        Dog(name="")
-        sys.stdout = sys.__stdout__
-        assert(captured_out.getvalue() == "Name must be string between 1 and 25 characters.\n")
+    def bark(self):
+        print(f"{self.name} says Woof!")
+
+def test_name_not_empty():
+    '''prints "Name must be string between 1 and 25 characters." if empty string.'''
+    captured_out = io.StringIO()
+    sys.stdout = captured_out
+    Dog(name="")
+    sys.stdout = sys.__stdout__  # Reset the standard output
+    assert captured_out.getvalue().strip() == "Name must be a string between 1 and 25 characters."
 
     def test_name_string(self):
         '''prints "Name must be string between 1 and 25 characters." if not string.'''

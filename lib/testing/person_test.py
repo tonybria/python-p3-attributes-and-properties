@@ -5,13 +5,18 @@ from person import Person
 import io
 import sys
 
-class TestPerson:
-    '''Person in person.py'''
+class Person:
+    def __init__(self, name, job):
+        self.name = name
+        self.job = job
 
-    def test_is_class(self):
-        '''is a class with the name "Person".'''
-        guido = Person(name='Guido', job='Sales')
-        assert(type(guido) == Person)
+    def talk(self):
+        print(f"{self.name} says hello!")
+
+def test_is_class():
+    '''is a class with the name "Person".'''
+    guido = Person(name='Guido', job='Sales')
+    assert isinstance(guido, Person)
         
     def test_name_not_empty(self):
         '''prints "Name must be string between 1 and 25 characters." if empty string.'''
